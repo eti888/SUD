@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Contrôle le zoom et la taille sur les dispositifs mobiles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compte à rebours jusqu'au 20 août 2025 à 9h20 AM</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-size: 2em;
+      text-align: center;
+      margin-top: 20%;
+    }
+  </style>
+</head>
+<body>
+  <div>Millisecondes restantes jusqu'au 20 août 2025 à 9h20 AM (heure du Canada) :</div>
+  <div id="countdown"></div>
+
+  <script>
+    // Définir l'heure cible, ici avec l'offset -04:00 pour une zone Canada/Toronto en été
+    const targetDate = new Date("2025-08-20T09:20:00-04:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      document.getElementById("countdown").innerText = distance.toLocaleString();
+    }
+
+    // Mise à jour en temps réel chaque milliseconde
+    setInterval(updateCountdown, 1);
+  </script>
+</body>
+</html>
