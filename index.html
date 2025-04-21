@@ -11,42 +11,45 @@
       text-align: center;
       margin-top: 20%;
     }
-    .time-unit {
-      margin-top: 10px;
-    }
+    .time-unit { margin-top: 10px; }
   </style>
 </head>
 <body>
-  <div>Countdown jusqu'au 20 août 2025 à 9h20 AM</div>  
-  <div class="time-unit">Millisecondes restantes : <span id="countdown"></span></div>
-  <div class="time-unit">Secondes restantes : <span id="countdownSeconds"></span></div>
-  <div class="time-unit">Minutes restantes : <span id="countdownMinutes"></span></div>
-  <div class="time-unit">Heures restantes : <span id="countdownHours"></span></div>
+  <div>Countdown jusqu'au 20 août 2025 à 9h20 AM</div>
+  <div class="time-unit">Millisecondes restantes : <span id="countdown"></span></div>
+  <div class="time-unit">Secondes restantes : <span id="countdownSeconds"></span></div>
+  <div class="time-unit">Minutes restantes : <span id="countdownMinutes"></span></div>
+  <div class="time-unit">Heures restantes : <span id="countdownHours"></span></div>
+  <div class="time-unit">Jours restants : <span id="countdownDays"></span></div>
 
   <script>
-    // Date cible avec l'offset -04:00 pour la zone Canada/Toronto en été
+    // Date cible (UTC‑4, heure d’été pour Toronto)
     const targetDate = new Date("2025-08-20T09:20:00-04:00").getTime();
 
     function updateCountdown() {
-      const now = new Date().getTime();
+      const now = Date.now();
       const distance = targetDate - now;
-      
+
       // Millisecondes
       document.getElementById("countdown").innerText = distance.toLocaleString();
 
-      // Calculer les unités de temps restantes
+      // Unités entières
       const seconds = Math.floor(distance / 1000);
       const minutes = Math.floor(distance / (1000 * 60));
       const hours   = Math.floor(distance / (1000 * 60 * 60));
 
-      // Afficher les valeurs dans les éléments HTML correspondants
       document.getElementById("countdownSeconds").innerText = seconds.toLocaleString();
       document.getElementById("countdownMinutes").innerText = minutes.toLocaleString();
-      document.getElementById("countdownHours").innerText = hours.toLocaleString();
+      document.getElementById("countdownHours").innerText   = hours.toLocaleString();
+
+      // Jours avec 2 décimales
+      const days = distance / (1000 * 60 * 60 * 24);
+      document.getElementById("countdownDays").innerText =
+        days.toLocaleString("fr-CA", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
-    // Mise à jour en temps réel
-    setInterval(updateCountdown, 1);
+    // Rafraîchissement toutes les secondes
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
