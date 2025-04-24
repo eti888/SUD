@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,14 +17,17 @@
 </head>
 <body>
   <div>Countdown jusqu'au 20 août 2025 à 9h20 AM</div>
-  <div class="time-unit">Millisecondes restantes : <span id="countdown"></span></div>
-  <div class="time-unit">Secondes restantes : <span id="countdownSeconds"></span></div>
-  <div class="time-unit">Minutes restantes : <span id="countdownMinutes"></span></div>
-  <div class="time-unit">Heures restantes : <span id="countdownHours"></span></div>
-  <div class="time-unit">Jours restants : <span id="countdownDays"></span></div>
+  <div class="time-unit">Millisecondes restantes : <span id="countdown"></span></div>
+  <div class="time-unit">Secondes restantes : <span id="countdownSeconds"></span></div>
+  <div class="time-unit">Minutes restantes : <span id="countdownMinutes"></span></div>
+  <div class="time-unit">Heures restantes : <span id="countdownHours"></span></div>
+  <div class="time-unit">Jours restants : <span id="countdownDays"></span></div>
+  <!-- Ajouts -->
+  <div class="time-unit">Semaines restantes : <span id="countdownWeeks"></span></div>
+  <div class="time-unit">Mois restants : <span id="countdownMonths"></span></div>
 
   <script>
-    // Date cible (UTC‑4, heure d’été pour Toronto)
+    // Date cible (UTC-4, heure d’été pour Toronto)
     const targetDate = new Date("2025-08-20T09:20:00-04:00").getTime();
 
     function updateCountdown() {
@@ -46,6 +50,16 @@
       const days = distance / (1000 * 60 * 60 * 24);
       document.getElementById("countdownDays").innerText =
         days.toLocaleString("fr-CA", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      // Semaines avec 2 décimales
+      const weeks = distance / (1000 * 60 * 60 * 24 * 7);
+      document.getElementById("countdownWeeks").innerText =
+        weeks.toLocaleString("fr-CA", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      // Mois (≈30,44 jours) avec 2 décimales
+      const months = distance / (1000 * 60 * 60 * 24 * 30.44);
+      document.getElementById("countdownMonths").innerText =
+        months.toLocaleString("fr-CA", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     // Rafraîchissement toutes les secondes
@@ -53,3 +67,4 @@
   </script>
 </body>
 </html>
+```
